@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Portfolio Site</title>
+	<link rel="stylesheet" href="css/default.css">
+</head>
+<body>
+	<nav>
+		<a href="index.html">about me</a>
+		<a href="skills.html" class="active">projects</a>
+		<a href="academics.html">academics</a>
+		<a href="contact.html">contact me</a>
+	</nav>
+	<header>
+		<img>
+		<h1>zach weachter</h1>
+		<h2>my role/title that rotates</h2>
+		<button>and ...?</button>
+	</header>
+
+	<h2>this, for starters, is a project, i guess.</h2>
+	<p>i've decided to separate my projects into slightly more managable categories. they're mostly broken down by where/how i completed them. since many of these are school projects, i can't share the source code publicly, but if you're interested, please contact me and we can talk about specifics of what i've done!</p>
+	<nav>
+		<a href="skills.html">skills</a>
+		<a href="intro.html">intro projects</a>
+		<a href="cs33.html">computer systems</a>
+		<a href="ai1410.html">artificial intelligence</a>
+		<a href="misc.html">misc.</a>
+	</nav>
+
+	<main id="skills">
+		<h3>skills</h3>
+		<p>i know i said "projects" but we're going to start with this instead. it's not practical or efficient to showcase every skill i have with a project, so i'm going to list some here and you can check out the projects below to assess how accurate i am. in no particular order:</p>
+		<dl>
+			<dt>languages</dt>
+			<dd>python, C, java, R, scala, x86_64 assembly, prolog, LaTeX, HTML, CSS, javascript, pyret</dd>
+			<dt>technical skills</dt>
+			<dd>google suite, microsoft office, object-oriented programming, w3c accessibility</dd>
+			<dt>non-technical skills</dt>
+			<dd>communication, teaching, leadership, customer service</dd>
+		</dl>
+	</main>
+
+	<section id="intro">
+		<h3>intro projects</h3>
+		<p>i've classed these projects as "into" because i completed them in my introductory computer science courses at brown.</p>
+		<section>
+			<h4>search</h4>
+			<p>this project was written in scala. given an XML file containing pages that link to one another, it will index the pages and then query the results, similar to how modern search engines work. additionally, it implements Google's PageRank algorithm, which accounts for page linkages in search results.</p>
+			<details>
+				<summary>usage</summary>
+				<p>Before any querying can begin, the indexer must be run. It takes exactly one argument, which is the filepath that leads to a valid XML file. This program will write three files--<code>titles.txt</code>, <code>docs.txt</code>, and <code>words.txt</code>--all of which will be used to query the document. Once the indexer has completed, you will be able to query that file via the querier.</p>
+				<p>The querier takes in either three or four arguments. If you would like to use PageRank in your queries, the first argument to the querier should be <code>--pagerank</code>, followed by the filepaths that lead to the title index (<code>titles.txt</code>), the document index (<code>docs.txt</code>), and the word index (<code>words.txt</code>) in that order. If you would not like to use PageRank, simply omit the argument <code>--pagerank</code> and keep the remaining three arguments in order.</p>
+				<p>Once the arguments have been passed to the querier, you can begin your search of the document. When prompted by the term "search", enter the word(s) that you would like to query. After, the results will be printed. To search with another query, simply enter the words(s) when prompted again. To end the query, enter <code>:quit</code> into the search prompt.</p>
+			</details>
+			<details>
+				<summary>design & implementation</summary>
+				<p>Indexer:</p>
+				<p>XML files are indexed in 4 main parts:</p>
+				<ol>
+					<li><code>pageTitleTable</code>, which maps each unique page ID to the title of the corresponding page. an additional hash map, <code>pageTitlesToIDS</code>, is created here as well that maps page titles to their unique page IDs. This hash map is used in the later calculations for PageRank.</li>
+					<li><code>idsToMaxFreqs()</code>, which maps each unique page ID to the number of times the most commonly used word on the page appears on the page. This is achieved by going through <code>pageTokenTable</code> (a hash map of page IDs mapped to an array of the tokenized version of all the words that appear on that page), counting how many times each word appears on that page and finding the maximum value from there.</li>
+					<li>
+					<code>pageRank()</code>, which maps each page ID to its ranking (in the local variable <code>rankMap</code>). It uses helper methods that:
+						<ol>
+							<li>check if one page links to another (accounting for the special cases) by checking <code>pageLinksTable</code>, which is created at the same time as the indexer itself that maps page IDs to a set of all the page IDs that this page links to</li>
+							<li>calculate the weight of each pair of pages, accounting for the special cases (weight)</li>
+							<li>calculate the distance between iterations of the ranking (distance)</li>
+						</ol>
+					</li>
+					<li><code>wordsToDocumentFrequencies()</code>, which maps each word that appears in the corpus to a hashtable that maps each page ID to the number of times the word appears on that page. This is achieved by looping through each page, looking at each word on that page and either adding it to the big hashmap if it doesn't exist yet, or updating the value for that page on the small hashmap if it does.</li>
+				</ol>
+				<p>Querier:</p>
+				<p>The querier runs its calculations by using the data structures that were created in the indexer. After the user has submitted a query, the input is appropriately tokenized and stored as the local variable "words". The helper method <code>calcRank()</code> is then called, which calculates the total page score for each page based on the input query words. The results are stored as the local variable <code>idsToPageScores</code>, which is a buffer of tuples, each containing the page IDs and their associated scores. Then, this buffer is converted into an array and sorted from highest to lowest score and the helper method <code>printResults()</code> prints the top 10 results (or fewer if less than 10 matching pages were found). If no results are found, "Could not find input on any pages. Try another query." is printed.</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+		<section>
+			<h4>recommender</h4>
+			<p>this project was written in java. given a CSV file of data, this project generates a decision tree and then makes predictions about new data based on that decision tree.</p>
+			<details>
+				<summary>design & implementation</summary>
+				<p>the decision tree is created using custom node and leaf classes, where each edge represents an attribute and each leaf represents a decision. the data is parsed from the csv format and then represented in this tree structure. given a target attribute, the tree is generated where each leaf is an option from that attribute and each node is one of the other non-target attributes. given a new point of data, the tree can also look up what the decision regarding that attribute should be, based on how similar it is to data that the tree was generated from.</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+		<section>
+			<h4>model checking</h4>
+			<p>this project was written in scala. this project is a model of how we might ensure that a program will always run safely: it's easy to test a small function, but it might not be possible to test all cases in a realistic system. this project models a program as a graph, and accordingly is able to check for safety (nothing bad happens) and liveness (something good happens).</p>
+			<details>
+				<summary>design & implementation</summary>
+				<p>there were two main approaches considered for the representation of the state machine: an adjacency matrix or an adjacency list, both of which are representations of graphs. i implemented both options, and found that the matrix implementation was more space efficient, while the list was more time efficient. i decided that in this instance, time was more valuable so i continued with that approach. additionally, the matrix had more limitations (since it had to use static arrays).</p>
+				<p>each node in the graph stored information about the current state of the program and the one-directional edges represented possible changes in the program at runtime.</p>
+				<p>each state machine, one initialized, can check to make sure a program always meets some condition (<code>checkAlways()</code>) or that it never meets some condition (<code>checkNever()</code>). specifically, only states that are reachable from the set <code>startNode</code> are checked.</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+		<section>
+			<h4>maze</h4>
+			<p>this project was written in pyret. this project is a "maze game" that is playable! this was one of my first ever cs projects, so it's got <abbr title="the bottom of the list">a special place in my heart</abbr>. the objective is to help <a href="https://www.brown.edu/about/public-art/Fischer">bleuno</a> (our lovable lamp/bear) escape from outer space through the space ship. be careful though: make sure blueno doesn't run out of stamina... <a href="https://www.brown.edu/news/2020-09-03/blueno">or else</a>!</p>
+			<details>
+				<summary>design & implementation</summary>
+				<p>the built-in "reactors" in pyret provide much of the structure needed for the game. the reactor continuously calls my custom functions that draw and update the gamestate. the gamestate keeps track of the player position, player stamina, and gadget positions.</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>instead of a video... why don't i just let you play the game yourself? <a href="https://code.pyret.org/editor#share=1BJVlefYlc4hbdc30NAZ7LvpdnRhrTr7-&v=1904b2c">you can play the game here</a> (using WASD to move)! like some other projects, i had to abstract the code away, but i hope you enjoy anyway. </p>
+			</details>
+		</section>
+	</section>
+	
+	<section id="cs33">
+		<h3>computer systems</h3>
+		<p>these projects were completed in my computer systems course at brown. nothing too "flashy" here, but these projects are more technical in nature anyway.</p>
+		<section>
+			<h4>shell</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+		<section>
+			<h4>maze generator & solver</h4>
+			<details>
+				<summary>design & implementation</summary>
+				<p></p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+		<section>
+			<h4>atoi</h4>
+			<p>written in x86_64 assemply, this project implements the built-in C function <code>atoi()</code>, which converts a string argument to an integer.</p>
+			<details>
+				<summary>design & implementation</summary>
+				<p><code>atoi()</code> goes through each ascii character in the input and loops through each one until it either reaches the end or finds a non-numerical character.</p>
+				<p>one of the biggest challenges of this project was that it had to be written entirely in machine code and not some other higher-level langauge, so i had to manage registers and accumulators in the system processor.</p>
+				<p>honestly, this project was not very long, but gave me a really good understanding of how registers and low-level processing work.</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>coming soon!</p>
+			</details>
+		</section>
+	</section>
+	
+	<section id="ai">
+		<h3>artificial intelligence</h3>
+		<p>these projects were completed in my ai course at brown. this course was a lot of work, but honestly a lot of fun, too.</p>
+		<section>
+			<h4>search</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>adversarial search</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>knowledge representation and reasoning</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>hidden markov models</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>reinforcement learning</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>supervised learning</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>tron</h4>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+	</section>
+	
+	<section id="misc">
+		<h3>miscellaneous</h3>
+		<p>here's where i'm keeping all of the other projects i've done that don't fit into any of the other categories.</p>
+		<section>
+			<h4>um... this</h4>
+			<p>this webpage is a project! it's not the most flashy, but that's intentional; i don't really like the overwhelming style of many other protfolio sites. my focus, instead is on accessibility, which i hope is evident.</p>
+			<details>
+				<summary>design & implementation</summary>
+				<p>this site originates from the capstone course i completed as part of the "web design for all" specialization. as such, accessibility has been a priority from the start (as it should always be).</p>
+				<p>of course, i want you to be able to check out all that i've done, so i hope that you've enjoyed your time here so far!</p>
+				<p>the <a href="https://github.com/zachweach/zachweach.github.io.git">source code of this page</a> is available on my github, so i hope you'll check it and validate (pun intended) my claims!</p>
+			</details>
+			<details>
+				<summary>demo</summary>
+				<p>congrats, you're already doing this!</p>
+			</details>
+		</section>
+		<section>
+			<h4>tic</h4>
+			<p>2d game engines</p>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+		<section>
+			<h4>alc</h4>
+			<p>2d game engines</p>
+			<details>
+				<summary>design & implementation</summary>
+
+			</details>
+			<details>
+				<summary>demo</summary>
+				
+			</details>
+		</section>
+	</section>
+</body>
+</html>
