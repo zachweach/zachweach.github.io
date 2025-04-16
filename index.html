@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Portfolio Site</title>
-</head>
-<body style="height: 100vh">
-	<embed src="resume.pdf" height=100% width=100%/>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>zach weachter</title>
+    <link rel="stylesheet" href="./style/anim.css">
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/gallery.css">
+    <link rel="icon" type="image/x-icon" href="./assets/logo.ico">
+  </head>
+  <body>
+    <header>
+      <a href="./" id="title">hi, im zach!</a>
+      <button id="hamburger-menu">Menu</button>
+      <nav id="navbar">
+        <a href="./personas">personas</a>
+        <a href="./redesign">responsive redesign</a>
+        <a href="./iterative">iterative design</a>
+        <a href="./development">development</a>
+      </nav>
+    </header>
+    <main>
+      <h1 id="main-header">i'm <span id="typed-text" aria-live="polite" role="status"></span><span class="cursor">|</span></h1>
+      <section class="id">
+        <h2>Welcome to my Portfolio!</h2>
+        <p>In addition to all that's shown above, I'm a computer scientist dedicated to utilizing technology to improve the lives of the humans using it. Here, in this portfolio, I'm showcasing some of the work that I've done. Please check out some of these featured projects!</p>
+        <p>I'm currently <i>#OpenToWork</i>, so please connect with me if you think I could help out with your project. Whether that's a full-time role or a project you want to actualize, I'm available to hear you out and see if I can help! You can check out my resume here:</p>
+        <a id="resume-button" href="https://zachweach.github.io/resume.pdf">Resume</a>
+        <p>I'm always down to talk about accessibility, anything computers, or your favorite musical! You can reach me at <a href="mailto:zachweachter@gmail.com">zachweachter@gmail.com</a> to get in contact, or connect with me on LinkedIn!</p>
+        <div class="socials">
+          <i class="fa-brands fa-linkedin"></i>
+          <a href="mailto:zachweachter@gmail.com"><img src="./assets/email.png" alt="Email link"></a>
+          <a href="https://www.linkedin.com/in/zachweach"><img src="./assets/LinkedIn.png" alt="LinkedIn profile link"></a>
+          <a href="https://github.com/zachweach"><img src="./assets/GitHub.png" alt="Github profile link"></a>
+        </div>
+      </section>
+      <section>
+        <h2>UI/UX Projects</h2>
+        <ul class="gallery">
+          <li class="card">
+            <a href="./uiux-portfolio/personas">personas</a>
+          </li>
+          <li class="card">
+            <a href="./uiux-portfolio/redesign">responsive redesign</a>
+          </li>
+          <li class="card">
+            <a href="./uiux-portfolio/iterative">iterative design</a>
+          </li>
+          <li class="card">
+            <a href="./uiux-portfolio/development">development</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <section class="left">
+        <h3>UI/UX Portfolio</h3>
+        <p>Thanks for checking out my page! This site was made for a portfolio project for a <a href="https://cs.brown.edu/courses/csci1300/">UI/UX course</a> at Brown. Icons by <a href="https://icons8.com/">Icons8</a>.</p>
+      </section>
+      <section class="right">
+        <h3>Contact me!</h3>
+        <p>If you want to get in touch, feel free to contact me at <a href="mailto:zachweachter@gmail.com">zachweachter@gmail.com</a>.</p>
+      </section>
+    </footer>
+  </body>
+  <script type="text/javascript" src="./js/navbar.js"></script>
+  <script type="text/javascript" src="./js/titles.js"></script>
 </html>
