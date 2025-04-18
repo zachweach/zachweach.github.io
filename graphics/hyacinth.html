@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>zach weachter</title>
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="icon" type="image/x-icon" href="../assets/logo.ico">
+  </head>
+  <body>
+    <header>
+      <a href="https://zachweach.github.io/" id="title">hi, im zach!</a>
+      <button id="hamburger-menu">Menu</button>
+      <nav id="navbar">
+        <a href="./graphics/hyacinth">hyacinth labyrinth</a>
+        <a href="./graphics/ecoterrtain">ecoterrain</a>
+        <a href="./graphics/raster">raster/paint!</a>
+        <a href="./graphics/raytracing">raytracing</a>
+        <a href="./graphics/realtime">realtime</a>
+        <a href="./graphics/pathtracing">pathtracing</a>
+        <a href="./graphics/fem">FEM sim.</a>
+        <a href="./graphics/arap">ARAP modeling</a>
+      </nav>
+    </header>
+    <main>
+    <section>
+      <h1>Hyacinth Labyrinth</h1>
+      <p>Hyacinth Labyrinth was my capstone project for Computer Graphics I (CSCI2230), created during my Master's program at Brown University. Our goal was to procedurally generate a 3D maze environment that felt immersive and dynamic, with decorative elements and realistic physical interaction. It was a collaborative effort that brought together multiple advanced graphics and engineering techniques, including procedural asset generation, real-time physics simulation, and rendering via Vulkan.</p>
+      <a class="standout-button" href="https://github.com/dominicchui/hyacinth-labyrinth">GitHub Repo</a>
+    </section>
+    <section>
+      <h2>Video Demonstration</h2>
+      <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/prmrjpensuo?si=6sff6lsUC_87SULY&start=2469&end=2601" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin: auto; display: block;"></iframe>
+    </section>
+    <section>
+      <h2>Core Components</h2>
+      <h3>Maze Generation</h3>
+      <p>The heart of "the labyrinth" is a maze generator that builds a unique environment on every run. Using a modified version of Wilson's Algorithm, the system carves out paths and ensures that each maze is fully navigable while remaining random. This component served as the foundation for all other systems, dictating the placement of walls, decorations, and interactive elements.</p>
+      <p>To make the environment feel natural rather than artificial, we added slight variations and imperfections to wall placement and structure. These subtle deviations helped convey the impression of an organic, overgrown garden rather than a rigid puzzle box.</p>
+      <h3>Set Decoration</h3>
+      <p>I was responsible for populating the maze with decorative elements that gave the environment its distinctive look. These decorations included plants, hedges, and other foliage. We generated new, unique decorations using L-systems, which are often used to simulate realistic, natural plant growth patterns.</p>
+      <p>The placement of these decorations was algorithmically guided by visual cohesion rules, ensuring they felt naturally embedded in the environment while not obstructing the simulatiom.</p>
+      <h3>Physics Simulation</h3>
+      <p>The primary interaction within the maze is the movement of a central ball, which is controlled in real-time. I designed and implemented the physics system that governs how this ball moves, reacts to user input, and responds to collisions with maze elements. We prioritized responsiveness and realism, ensuring the ball felt weighty and accurate while remaining fun to control.</p>
+      <p>Each wall was treated as a collider, and the ball's trajectory responded with realistic bounces and momentum. We also implemented friction and velocity decay, which gave movement a tactile feel and prevented the ball from drifting indefinitely. This system was deeply integrated with the maze layout, updating dynamically based on the generated structure.</p>
+      <h3>Rendering</h3>
+      <p>We used Vulkan to apply real-time ray tracing techniques to specific areas to increase the visual appeal of the simulation.</p>
+    </section>
+    <section>
+      <h2>Asset Generation</h2>
+      <h3>L-System Plants & Foliage</h3>
+      <p>To populate the maze with organic-looking greenery, we used L-systems (Lindenmayer systems), a mathematical framework often used to simulate plant growth. This system creates new trees, shrubs, and vines with parameterized structure and variation, ensuring that the environment always feels fresh and natural.</p>
+      <p>This technique allowed us to avoid placing static models repeatedly, instead letting each run of the game feature slightly different flora. The system supports branching logic, randomized growth factors, and various leaf textures, creating everything from gnarled hedges to delicate hanging vines.</p>
+      <h3>Textures and Materials</h3>
+      <p>We designed a custom texture pipeline to support both stylized and semi-realistic materials. The maze walls were textured to resemble damp stone and mossy brick, while foliage assets used materials with subtle color variation to capture the light beautifully.</p>
+    </section>
+    <section>
+      <h2>Live Elements</h2>
+      <h3>On-Run Maze Creation</h3>
+      <p>The experience of Hyacinth Labyrinth is different every time it is launched. Each time, a new maze layout is generated from scratch, with a unique structure and decoration set. There is no "solution," but rather exploration and experimentation are encouraged.</p>
+      <h3>Object Placement</h3>
+      <p>As the maze structure is created, decorations and foliage are placed in tandem. Rather than randomizing blindly, our placement system analyzed the surrounding layout to determine what type of asset would make the most sense in each location.</p>
+      <h3>Real-Time Physics</h3>
+      <p>As the ball moves through the maze, all movement and collision responses are computed in real time.</p>
+    </section>
+    </main>
+    <footer>
+      <section class="left">
+        <h3>Graphics Portfolio</h3>
+        <p>Thanks for checking out my page! These projects were made for a <a href="https://cs1230.graphics">Computer Graphics course</a> (and an <a href="https://cs2240.graphics">advanced course</a>) at Brown.</p>
+      </section>
+      <section class="right">
+        <h3>Contact me!</h3>
+        <p>If you want to get in touch, feel free to contact me at <a href="mailto:zachary_weachter@brown.edu">zachary_weachter@brown.edu</a>.</p>
+      </section>
+    </footer>
+  </body>
+  <script type="text/javascript" src="../js/navbar.js"></script>
+</html>

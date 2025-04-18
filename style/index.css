@@ -23,6 +23,10 @@ table {
 @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9b05f3/000000000000000000013365/27/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/9b05f3/000000000000000000013365/27/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/9b05f3/000000000000000000013365/27/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-stretch:normal;font-display:auto;}
 @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/309dfe/000000000000000000010091/27/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/309dfe/000000000000000000010091/27/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/309dfe/000000000000000000010091/27/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-stretch:normal;font-display:auto;}
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: rgb(127, 199, 255, 0.1);
 }
@@ -295,7 +299,7 @@ th, td {
   border-left: 1px solid rgb(64, 55, 123);
 }
 
-#resume-button {
+.standout-button {
   background-color: #1473b8;
   color: #fff;
   text-decoration: underline;
@@ -309,7 +313,7 @@ th, td {
   width: fit-content;
   margin-bottom: 1rem;
 }
-#resume-button:hover {
+.standout-button:hover {
   color: rgb(255,255,255,0.9);
 	text-decoration: underline;
   cursor: pointer;

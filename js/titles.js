@@ -5,7 +5,7 @@ const titles = [
   'zach! but you knew that...', 'a web developer', 'a developer', 'a programmer', 'a coder',
   'the world\'s #1 inside joke fan', 'a teacher', 'a mentor', 'a full-stack developer',
   'a back-end developer', 'a data scientist', 'a creeeeep, i\'m a weirdooooo',
-  'your favorite developer\'s favorite developer', 'dancing rn 🕺', // 'a particle', 'a wave', // both at once?
+  'your favorite developer\'s favorite developer', '🕺 dancing rn', // 'a particle', 'a wave', // both at once?
   'never gonna give you up', 'a lifelong learner',
 ]
 

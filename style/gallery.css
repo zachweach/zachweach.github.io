@@ -45,7 +45,6 @@
 .gallery .card a {
   color: #fff;
   font-weight: bold;
-  font-size: 180%;
   line-height: 120%;
   padding: 1rem;
   border: none;
@@ -54,6 +53,11 @@
 .gallery .card a:hover {
   color: #fff;
   text-decoration: underline;
+}
+
+.gallery .card img {
+  padding: 7%;
+  border-radius: 20%;
 }
 
 .gallery .block {
@@ -84,9 +88,16 @@
   border-color: rgb(255, 255, 255, 1);
 }
 
+@media screen and (min-width: 767px) {
+  .gallery .card {
+    font-size: 2.5vw;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .gallery .card {
-    flex: 40%
+    flex: 40%;
+    font-size: 5vw;
   }
 }
 
